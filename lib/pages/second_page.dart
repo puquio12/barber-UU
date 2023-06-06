@@ -8,7 +8,7 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 14, 12, 12),
         body: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

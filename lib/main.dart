@@ -1,142 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:hero/pages/home_page.dart';
 
-void main() {
-  runApp(MaterialApp(
-    title: 'Materiales de Construcción',
-    home: Scaffold(
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: Colors.black,
+      ),
+      title: 'Mi App',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Inicio(),
+        '/detalle': (context) => Detalle(),
+        '/configuracion': (context) => Configuracion(),
+      },
+    );
+  }
+}
+
+class Inicio extends StatelessWidget {
+  Inicio({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Materiales de Construcción'),
+        title: Text("URBAN BARBER SHOP"),
       ),
-      body: MaterialStore(),
-    ),
-  ));
-}
-
-class MaterialStore extends StatefulWidget {
-  @override
-  _MaterialStoreState createState() => _MaterialStoreState();
-}
-
-class _MaterialStoreState extends State<MaterialStore> {
-  List<String> cartItems = [];
-
-  void addToCart(String item) {
-    setState(() {
-      cartItems.add(item);
-    });
-  }
-
-  void removeFromCart(String item) {
-    setState(() {
-      cartItems.remove(item);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        MaterialSection(
-          sectionTitle: 'Materiales de Construcción',
-          items: [
-            MaterialItem(
-              name: 'Cemento',
-              price: 10.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+              'https://images.pexels.com/photos/7518760/pexels-photo-7518760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Reemplaza con tu enlace de imagen
+              width: 500,
+              height: 500,
             ),
-            MaterialItem(
-              name: 'Ladrillos',
-              price: 0.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/detalle'),
+              child: Text('Ver detalles'),
             ),
-            MaterialItem(
-              name: 'Arena',
-              price: 5.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/configuracion'),
+              child: Text('Ver galeria'),
             ),
           ],
         ),
-        MaterialSection(
-          sectionTitle: 'Herramientas',
-          items: [
-            MaterialItem(
-              name: 'Martillo',
-              price: 8.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
-            ),
-            MaterialItem(
-              name: 'Destornillador',
-              price: 5.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
-            ),
-            MaterialItem(
-              name: 'Sierra',
-              price: 15.99,
-              onAddToCart: addToCart,
-              onRemoveFromCart: removeFromCart,
-            ),
-          ],
-        ),
-        ShoppingCart(cartItems: cartItems),
-      ],
+      ),
     );
   }
 }
 
-class MaterialSection extends StatelessWidget {
-  final String sectionTitle;
-  final List<MaterialItem> items;
-
-  MaterialSection({required this.sectionTitle, required this.items});
-
+class Detalle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            sectionTitle,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Detalle"),
+      ),
+      body: Center(
+        child: Text(
+          "Pantalla Detalle",
+          style: TextStyle(fontSize: 24),
         ),
-        Column(
-          children: items,
-        ),
-      ],
+      ),
     );
   }
 }
 
-class MaterialItem extends StatelessWidget {
-  final String name;
-  final double price;
-  final Function(String) onAddToCart;
-  final Function(String) onRemoveFromCart;
-
-  MaterialItem({
-    required this.name,
-    required this.price,
-    required this.onAddToCart,
-    required this.onRemoveFromCart,
-  });
-
+class Configuracion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(name),
-      subtitle: Text('\$${price.toStringAsFixed(2)}'),
-      trailing: IconButton(
-        icon: Icon(Icons.shopping_cart),
-        onPressed: () {
-          onAddToCart(name);
-        },
-      ),
+    return const MaterialApp(
+      title: 'Hero',
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
+}
